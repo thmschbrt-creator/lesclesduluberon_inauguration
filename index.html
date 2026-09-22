@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inauguration — Les Clés du Luberon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#F2ECE3;
+    --stone-deep:#E8DCC8;
+    --ink:#2B2620;
+    --clay-dark:#7A3A28;
+    --clay:#9F4D36;
+    --line: rgba(42,40,32,0.14);
+    --max: 560px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Tenor Sans', -apple-system, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:56px 24px 80px;
+  }
+  .eyebrow{
+    font-size:14px;
+    color:var(--clay-dark);
+    margin:0 0 10px;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-optical-sizing:auto;
+    font-weight:500;
+    font-size:clamp(34px, 8vw, 46px);
+    line-height:1.08;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--clay);
+  }
+  .intro{
+    font-size:17px;
+    color:#4A4738;
+    max-width:44ch;
+    margin:0 0 36px;
+  }
+  .details{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    padding:22px 0 30px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:40px;
+  }
+  .detail dt{
+    font-size:12px;
+    color:var(--clay-dark);
+    margin-bottom:4px;
+  }
+  .detail dd{
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+  }
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .field label{
+    display:block;
+    font-size:13px;
+    color:#4A4738;
+    margin-bottom:7px;
+  }
+  .field input[type="text"],
+  .field input[type="email"]{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+    font-family:inherit;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .field input:focus{
+    outline:2px solid var(--clay-dark);
+    outline-offset:1px;
+  }
+  .row2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  fieldset{
+    border:0;
+    padding:0;
+    margin:0;
+  }
+  legend{
+    font-size:13px;
+    color:#4A4738;
+    margin-bottom:9px;
+    padding:0;
+  }
+  .slot-options{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .slot{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:13px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+    cursor:pointer;
+  }
+  .slot:has(input:checked){
+    border-color:var(--clay-dark);
+    background:var(--stone-deep);
+  }
+  .slot input{
+    accent-color:var(--clay-dark);
+    width:17px;
+    height:17px;
+    flex-shrink:0;
+  }
+  .slot span{font-size:15px;}
+  .consent{
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+    padding-top:4px;
+  }
+  .consent input{
+    accent-color:var(--clay-dark);
+    width:17px;
+    height:17px;
+    flex-shrink:0;
+    margin-top:3px;
+  }
+  .consent label{
+    font-size:13px;
+    color:#4A4738;
+    line-height:1.5;
+  }
+  button{
+    margin-top:6px;
+    padding:16px;
+    border:0;
+    border-radius:3px;
+    background:var(--ink);
+    color:var(--stone);
+    font-family:'Tenor Sans', sans-serif;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+  }
+  button:hover{background:var(--clay-dark);}
+  button:disabled{opacity:0.55; cursor:default;}
+  .error{
+    font-size:13px;
+    color:#A03D2C;
+    display:none;
+  }
+  .error.show{display:block;}
+  .state{
+    display:none;
+    text-align:center;
+    padding:40px 0;
+  }
+  .state.show{display:block;}
+  .state p{color:#4A4738; font-size:15px;}
+  .checkmark{
+    width:52px;height:52px;
+    border-radius:50%;
+    border:1.5px solid var(--clay-dark);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 20px;
+  }
+  .logo{
+    font-family:'Tenor Sans', sans-serif;
+    font-weight:400;
+    font-size:14px;
+    letter-spacing:0.14em;
+    color:var(--ink);
+    margin:0 0 26px;
+  }
+  .maps-link{
+    display:inline-block;
+    margin-top:6px;
+    font-size:13px;
+    font-family:'Tenor Sans', sans-serif;
+    color:var(--clay-dark);
+    text-decoration:none;
+    border-bottom:1px solid var(--clay-dark);
+  }
+  .maps-link:hover{color:var(--ink); border-color:var(--ink);}
+  footer{
+    text-align:center;
+    margin-top:52px;
+    font-size:12px;
+    color:#8A8672;
+  }
+  .signature{
+    text-align:center;
+    margin-top:52px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--clay-dark);
+    letter-spacing:0.02em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="formState">
+    <p class="logo">LES CLÉS DU LUBERON</p>
+    <p class="eyebrow">Vous êtes invité·e</p>
+    <h1>L'agence ouvre ses portes.<br><em>Confirmez votre venue.</em></h1>
+    <p class="intro">Les Clés du Luberon vous convie à l'inauguration de sa nouvelle agence à Fontaine-de-Vaucluse. Indiquez-nous votre créneau de passage pour que nous vous réservions le meilleur accueil.</p>
+
+    <dl class="details">
+      <div class="detail">
+        <dt>Lieu</dt>
+        <dd>22 avenue Robert Garcin, Fontaine-de-Vaucluse<br>
+          <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=22+avenue+Robert+Garcin+84800+Fontaine-de-Vaucluse" target="_blank" rel="noopener">Voir l'itinéraire →</a>
+        </dd>
+      </div>
+      <div class="detail">
+        <dt>Date</dt>
+        <dd>Vendredi 23 octobre 2026 — de 10h à 23h</dd>
+      </div>
+    </dl>
+
+    <form id="rsvpForm">
+      <div class="row2">
+        <div class="field">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" name="prenom" required autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" required autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+
+      <fieldset>
+        <legend>Créneau(x) de venue envisagé(s) — plusieurs choix possibles</legend>
+        <div class="slot-options">
+          <label class="slot">
+            <input type="checkbox" name="creneau" value="10h-12h">
+            <span>10h – 12h</span>
+          </label>
+          <label class="slot">
+            <input type="checkbox" name="creneau" value="12h-14h">
+            <span>12h – 14h</span>
+          </label>
+          <label class="slot">
+            <input type="checkbox" name="creneau" value="18h et après">
+            <span>18h et après</span>
+          </label>
+        </div>
+        <p class="error" id="slotError">Sélectionnez au moins un créneau.</p>
+      </fieldset>
+
+      <div class="consent">
+        <input type="checkbox" id="rgpd" name="rgpd" required>
+        <label for="rgpd">J'accepte que Les Clés du Luberon collecte et utilise mes données (nom, prénom, e-mail) à des fins commerciales (contact, actualités, offres), dans le respect du RGPD et de mes droits d'accès, de rectification et de suppression.</label>
+      </div>
+
+      <p class="error" id="formError">Une erreur est survenue. Réessayez, ou écrivez-nous directement.</p>
+
+      <button type="submit" id="submitBtn">Confirmer ma présence</button>
+    </form>
+
+    <p class="signature">Immobilier de Prestige — Conciergerie Privée — Transactions Commerciales</p>
+  </div>
+
+  <div class="state" id="successState">
+    <div class="checkmark">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M4 11L9 16L18 6" stroke="#7A3A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1 style="font-size:26px;">Votre présence est confirmée.</h1>
+    <p>À très bientôt. Direction le site de l'agence…</p>
+  </div>
+
+  <footer>Les Clés du Luberon — SAS, RCS Avignon 104 410 337</footer>
+</div>
+
+<script>
+  // Remplacez GAS_ENDPOINT par l'URL de votre Web App Google Apps Script
+  // (ex. https://script.google.com/macros/s/XXXXX/exec) — voir les instructions
+  // fournies pour créer le Google Sheet + le script. Illimité et gratuit.
+  const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxjksrtIz2OnbUm9Dq3qm5NW5jKSbrlUdvFhYaFxBb2RHAWItOc6KCuD2iZWI6Fdptsiw/exec";
+  const REDIRECT_URL = "https://www.lesclesduluberon.com";
+
+  const form = document.getElementById('rsvpForm');
+  const formState = document.getElementById('formState');
+  const successState = document.getElementById('successState');
+  const errorMsg = document.getElementById('formError');
+  const submitBtn = document.getElementById('submitBtn');
+
+  const slotError = document.getElementById('slotError');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.classList.remove('show');
+    slotError.classList.remove('show');
+
+    const checkedSlots = form.querySelectorAll('input[name="creneau"]:checked');
+    if (checkedSlots.length === 0) {
+      slotError.classList.add('show');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Envoi…";
+
+    const data = new FormData(form);
+
+    try {
+      // Apps Script Web Apps ne renvoient pas d'en-têtes CORS lisibles :
+      // on envoie en mode no-cors et on considère l'appel réussi s'il
+      // n'a pas levé d'exception réseau (Apps Script est très fiable ici).
+      await fetch(GAS_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+      });
+
+      formState.style.display = "none";
+      successState.classList.add('show');
+
+      setTimeout(() => {
+        window.location.href = REDIRECT_URL;
+      }, 1800);
+
+    } catch (err) {
+      errorMsg.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Confirmer ma présence";
+    }
+  });
+</script>
+</body>
+</html>
